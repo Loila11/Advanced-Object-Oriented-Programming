@@ -16,8 +16,8 @@ Lab2:
 4. Se citesc de la tastatură N linii de forma:
 Nume1 nota1
 ...
-NumeN notaN
-Declarați o clasă Student cu atributele/constructorii/metodele necesare ca să mapați liniile citite de la tastatură. Stocați toți studenții într-un tablou. Afișați-l în fluxul de ieșire.
+NumeN notaN.
+Declarați o clasă 'Student' cu atributele/constructorii/metodele necesare ca să mapați liniile citite de la tastatură. Stocați toți studenții într-un tablou. Afișați-l în fluxul de ieșire.
 
 Lab4:
 1. Scrieți un program care să verifice dacă două șiruri de caractere sunt anagrame.

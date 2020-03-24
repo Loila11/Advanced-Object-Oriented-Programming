@@ -23,3 +23,14 @@ Lab4:
 1. Scrieți un program care să verifice dacă două șiruri de caractere sunt anagrame.
 2. Se citește de la tastatură un număr întreg n în intervalul [0,100] și n șiruri de caractere. Creați un vector cu toate șirurile de caractere care sunt palindroame și afișați lungimea maximă a unui palindrom din vector.
 3. Având la dispoziţie o imagine cu maxim 100 de linii şi coloane (numărul de coloane nu este neapărat egal cu cel al liniilor), să se realizeze un program ce permite conversia acesteia la o imagine binară, cu valori de 0 şi 1. Regula de conversie este aceea că orice valoare primă este convertită în 0 şi orice valoare care nu este primă, în 1. Imaginea obţinută va conţine ceea ce numim obiecte. Să se afişeze pe ecran dimensiunea obiectelor din imagine, aceasta fiind dată de numărul total de valori de 1 din imaginea binară.
+
+Lab5:
+1. Declarați o interfață Task care conține o metodă execute(), tipul returnat al metodei este void. Pe baza interfeței respective, o să implementați 3 clase: RandomTask, RandomOutTask și CounterOutTask:
+- pentru RandomTask implementați un task care să afișeze un
+mesaj în fluxul de ieșire. Inițializați mesajul în constructor.
+- pentru RandomOutTask implementați un task care generează un număr aleator și afișează un mesaj cu numărul generat la output. Generarea se va face în constructor.
+- pentru CounterOutTask implementați un task care incrementează un contor global și afișează valoarea contorului după fiecare incrementare.
+2. Declarați o clasă Album care are câmpurile: nume, anul publicării și rating.
+- implementați metodele clasei: constructori, getteri, setteri.
+- folosiți una din cele două interfețe de comparare (Comparable/Comparator) pentru a sorta o colecție de albume pe baza numelui și al ratingului.
+- declarați-vă o clasă Main în care să creați o listă de albume și să afișați colecția înainte și după sortare.

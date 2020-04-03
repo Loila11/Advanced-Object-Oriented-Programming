@@ -1,27 +1,29 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Transaction {
     private Client client;
-    private ArrayList<Item> items;
+    private HashMap<Item, Integer> items = new HashMap<>();
     private PaymentMethod paymentMethod;
 
 //    constructors
     public Transaction(Client client, PaymentMethod paymentMethod) {
         this.client = client;
-        this.items = new ArrayList<>();
         this.paymentMethod = paymentMethod;
     }
 
     public Transaction(Client client, Item item, PaymentMethod paymentMethod) {
         this.client = client;
-        this.items = new ArrayList<>();
-        this.items.add(item);
+        this.addItem(item);
         this.paymentMethod = paymentMethod;
     }
 
     public Transaction(Client client, ArrayList<Item> items, PaymentMethod paymentMethod) {
         this.client = client;
-        this.items = new ArrayList<>(items);
+        for (Item item : items) {
+            this.addItem(item);
+        }
         this.paymentMethod = paymentMethod;
     }
 
@@ -31,7 +33,10 @@ public class Transaction {
     }
 
     public void setItems(ArrayList<Item> items) {
-        this.items = items;
+        this.items.clear();
+        for (Item item : items) {
+            this.addItem(item);
+        }
     }
 
     public void setPaymentMethod(PaymentMethod paymentMethod) {
@@ -43,7 +48,7 @@ public class Transaction {
         return client;
     }
 
-    public ArrayList<Item> getItems() {
+    public Map<Item, Integer> getItems() {
         return items;
     }
 
@@ -53,7 +58,7 @@ public class Transaction {
 
 //    other
     public Item getItem(String itemName) {
-        for (Item item : this.items) {
+        for (Item item : this.items.keySet()) {
             if (item.getName().equals(itemName)) {
                 return item;
             }
@@ -62,10 +67,11 @@ public class Transaction {
     }
 
     public void addItem(Item item) {
-        if (this.items == null) {
-            this.items = new ArrayList<Item>();
+        if (this.items.containsKey(item)) {
+            this.items.replace(item, this.items.get(item) + 1);
+        } else {
+            this.items.put(item, 1);
         }
-        this.items.add(item);
     }
 
     public void removeItem(Item item) {
@@ -73,15 +79,16 @@ public class Transaction {
     }
 
     public void displayItems() {
-        for (Item item : this.items) {
-            item.displayItem();
+        for (Map.Entry<Item, Integer> entry : this.items.entrySet()) {
+            System.out.print(entry.getValue() + " * ");
+            entry.getKey().displayItem();
         }
     }
 
-    public int calcTotalPrice() {
-        int price = 0;
-        for (Item item : this.items) {
-            price += item.getPrice();
+    public double calcTotalPrice() {
+        double price = 0;
+        for (Map.Entry<Item, Integer> entry : this.items.entrySet()) {
+            price += entry.getKey().getPrice() * entry.getValue();
         }
         return price;
     }
@@ -89,6 +96,7 @@ public class Transaction {
     public void displayTransaction() {
         System.out.println(client.getName() + "\nPayment: " + paymentMethod.getPaymentMethod());
         displayItems();
+        System.out.println("Total: " + calcTotalPrice());
         System.out.println("-----------------");
     }
 

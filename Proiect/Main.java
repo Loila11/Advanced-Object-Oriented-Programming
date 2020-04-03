@@ -6,8 +6,19 @@ import java.util.Scanner;
 import static java.lang.Float.parseFloat;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-        ArrayList<Item> items = readItems(new File("C:\\Users\\mirun\\Facultate\\PAO\\Proiect\\src\\produse.txt"));
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        ArrayList<Item> items;
+        while (true){
+            System.out.println("Introduceti numele fisierului:");
+            try {
+                items = readItems(new File(in.nextLine()));
+                break;
+            } catch (FileNotFoundException e) {
+                System.out.println("Fisierul nu a fost gasit");
+            }
+        }
+
         items.sort(new SortByPrice());
 
         Checkout checkout = new Checkout(new Transaction(new Client("Marin"), items,

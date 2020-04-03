@@ -1,18 +1,18 @@
 public class Cash extends PaymentMethod {
-    int givenAmount;
+    double givenAmount;
 
 //    constructor
-    public Cash(int givenAmount) {
+    public Cash(double givenAmount) {
         this.givenAmount = givenAmount;
     }
 
 //    getter
-    public int getGivenAmount() {
+    public double getGivenAmount() {
         return givenAmount;
     }
 
 //    setter
-    public void setGivenAmount(int givenAmount) {
+    public void setGivenAmount(double givenAmount) {
         this.givenAmount = givenAmount;
     }
 
@@ -23,7 +23,7 @@ public class Cash extends PaymentMethod {
     }
 
     @Override
-    public boolean checkPaymentMethod(int price) {
+    public boolean checkPaymentMethod(double price) {
         return price <= givenAmount;
     }
 }

@@ -84,7 +84,7 @@ public class Card extends PaymentMethod {
     }
 
     @Override
-    public boolean checkPaymentMethod(int price) {
+    public boolean checkPaymentMethod(double price) {
         return checkCardNo() && checkExpYear() && checkExpMonth();
     }
 }

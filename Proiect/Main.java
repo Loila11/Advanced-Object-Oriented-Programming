@@ -18,13 +18,15 @@ public class Main {
                 System.out.println("Fisierul nu a fost gasit");
             }
         }
-
         items.sort(new SortByPrice());
 
         Checkout checkout = new Checkout(new Transaction(new Client("Marin"), items,
                 new Cash(50)));
         checkout.addTransaction(new Transaction(new Client("Ana Maria"), items.get(3),
                 new Card("1234567890123456", 3, 2021)));
+
+        items.add(new DiscountItem("faina", 1));
+
         checkout.addTransaction(new Transaction(new Client("Ionela"), items,
                 new MealVouchers(15.18, 2)));
         checkout.displayTransactions();

@@ -89,7 +89,9 @@ public class Transaction {
     public double calcTotalPrice() {
         double price = 0;
         for (Map.Entry<Item, Integer> entry : this.items.entrySet()) {
-            price += entry.getKey().getPrice() * entry.getValue();
+            Integer noItems = entry.getValue();
+            Item item = entry.getKey();
+            price += item.getPrice() * noItems;
         }
         return price;
     }

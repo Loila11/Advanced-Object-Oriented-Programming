@@ -1,11 +1,11 @@
 public class Item {
     protected String name;
-    protected float price;
+    protected double price;
     protected int ID;
     private static int cnt = 0;
 
 //    constructor
-    public Item(String name, float price) {
+    public Item(String name, double price) {
         cnt ++;
         ID = cnt;
         this.price = price;
@@ -17,7 +17,7 @@ public class Item {
         this.name = name;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -26,7 +26,7 @@ public class Item {
         return name;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 

@@ -23,6 +23,8 @@ Software casa de marcat
 
 - __Item__: Contine informatii despre un produs.
 
+- __DiscountItem__: Mosteneste clasa _Item_.
+
 - __PaymentMethod__: Clasa abstracta, reprezentand metoda de plata. Este clasa parinte pentru _Cash_ si _Card_. Contine metoda:
     - getPaymentMethod()
     - checkPaymentMethod(int price)

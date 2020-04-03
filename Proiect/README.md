@@ -5,6 +5,10 @@ Software casa de marcat
 ## Structura claselor
 - __Checkout__: Clasa de serviciu. Contine lista tuturor tranzactiilor efectuate anterior(ArrayList<_Transaction_>) si o serie de operatii care pot fi facute pe baza acestora:
     - addTransaction()
+    - calcTotalPrice()
+    - checkPayment()
+    - displayItems()
+    - displayTransaction()
     - displayTransactions()
     - displayCardTransactions()
     - displayCashTransactions()
@@ -14,10 +18,6 @@ Software casa de marcat
     - getItem(String itemName)
     - addItem(Item item)
     - removeItem(Item item)
-    - displayTransaction()
-    - displayItems()
-    - calcTotalPrice()
-    - checkPayment()
 
 - __Client__: Contine informatii despre un client.
 

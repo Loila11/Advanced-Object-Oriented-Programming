@@ -77,33 +77,4 @@ public class Transaction {
     public void removeItem(Item item) {
         this.items.remove(item);
     }
-
-    public void displayItems() {
-        for (Map.Entry<Item, Integer> entry : this.items.entrySet()) {
-            Integer noItems = entry.getValue();
-            Item item = entry.getKey();
-            System.out.println(noItems + " * " + item.getName() + ' ' + item.getPrice());
-        }
-    }
-
-    public double calcTotalPrice() {
-        double price = 0;
-        for (Map.Entry<Item, Integer> entry : this.items.entrySet()) {
-            Integer noItems = entry.getValue();
-            Item item = entry.getKey();
-            price += item.getPrice() * noItems;
-        }
-        return price;
-    }
-
-    public void displayTransaction() {
-        System.out.println(client.getName() + "\nPayment: " + paymentMethod.getPaymentMethod());
-        displayItems();
-        System.out.println("Total: " + calcTotalPrice());
-        System.out.println("-----------------");
-    }
-
-    public boolean checkPayment() {
-        return paymentMethod.checkPaymentMethod(calcTotalPrice());
-    }
 }

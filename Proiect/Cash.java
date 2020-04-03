@@ -1,5 +1,5 @@
 public class Cash extends PaymentMethod {
-    double givenAmount;
+    private double givenAmount;
 
 //    constructor
     public Cash(double givenAmount) {

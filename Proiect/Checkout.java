@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Checkout {
-    ArrayList<Transaction> transactions;
+    private ArrayList<Transaction> transactions;
 
 //    constructors
     public Checkout() {

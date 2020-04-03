@@ -1,6 +1,7 @@
 public class DiscountItem extends Item {
-    int discount = 10;
+    private int discount = 10;
 
+//    constructor
     public DiscountItem(String name, double price) {
         super(name, price);
     }

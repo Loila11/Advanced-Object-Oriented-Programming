@@ -1,6 +1,6 @@
 public class MealVouchers extends PaymentMethod{
-    double value;
-    int noVouchers;
+    private double value;
+    private int noVouchers;
 
 //    constructor
     public MealVouchers(double value, int noVouchers) {

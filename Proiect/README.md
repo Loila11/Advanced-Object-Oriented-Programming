@@ -4,11 +4,11 @@ Software casa de marcat
 
 ## Structura claselor
 - __Checkout__: Clasa de serviciu. Contine lista tuturor tranzactiilor efectuate anterior(ArrayList<_Transaction_>) si o serie de operatii care pot fi facute pe baza acestora:
-    - addTransaction()
-    - calcTotalPrice()
-    - checkPayment()
-    - displayItems()
-    - displayTransaction()
+    - addTransaction(Transaction transaction)
+    - calcTotalPrice(Transaction transaction)
+    - checkPayment(Transaction transaction)
+    - displayItems(Transaction transaction)
+    - displayTransaction(Transaction transaction)
     - displayTransactions()
     - displayCardTransactions()
     - displayCashTransactions()
@@ -27,7 +27,7 @@ Software casa de marcat
 
 - __PaymentMethod__: Clasa abstracta, reprezentand metoda de plata. Este clasa parinte pentru _Cash_ si _Card_. Contine metoda:
     - getPaymentMethod()
-    - checkPaymentMethod(int price)
+    - checkPaymentMethod(double price)
 
 - __Cash__: Clasa derivata din _PaymentMethod_.
 

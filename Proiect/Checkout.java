@@ -53,4 +53,12 @@ public class Checkout {
             }
         }
     }
+
+    public void displayVoucherTransactions() {
+        for (Transaction transaction : this.transactions) {
+            if (transaction.getPaymentMethod().getPaymentMethod().equals("Bonuri de masa")) {
+                transaction.displayTransaction();
+            }
+        }
+    }
 }

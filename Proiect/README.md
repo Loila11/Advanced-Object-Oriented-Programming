@@ -8,6 +8,7 @@ Software casa de marcat
     - displayTransactions()
     - displayCardTransactions()
     - displayCashTransactions()
+    - displayVoucherTransactions()
 
 - __Transaction__: Contine informatii despre produsele care urmeaza a fi achizitionate(ArrayList<_Item_>), clientul caruia ii apartin(_Client_) si metoda de plata pe care planuieste sa o foloseasca(_PaymentMethod_). Include operatiile:
     - getItem(String itemName)
@@ -20,8 +21,7 @@ Software casa de marcat
 
 - __Client__: Contine informatii despre un client.
 
-- __Item__: Contine informatii despre un produs si operatia:
-    - displayItem()
+- __Item__: Contine informatii despre un produs.
 
 - __PaymentMethod__: Clasa abstracta, reprezentand metoda de plata. Este clasa parinte pentru _Cash_ si _Card_. Contine metoda:
     - getPaymentMethod()
@@ -33,6 +33,8 @@ Software casa de marcat
     - checkExpMonth()
     - checkExpYear()
     - checkCardNo()
+
+- __MealVouchers__: Clasa derivata din _PaymentMethod_.
 
 - __SortByPrice__, __SortByName__: doua metode de sortare a listei de produse din magazin.
 

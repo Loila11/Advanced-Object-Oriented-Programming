@@ -80,8 +80,9 @@ public class Transaction {
 
     public void displayItems() {
         for (Map.Entry<Item, Integer> entry : this.items.entrySet()) {
-            System.out.print(entry.getValue() + " * ");
-            entry.getKey().displayItem();
+            Integer noItems = entry.getValue();
+            Item item = entry.getKey();
+            System.out.println(noItems + " * " + item.getName() + ' ' + item.getPrice());
         }
     }
 

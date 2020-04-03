@@ -25,6 +25,8 @@ public class Main {
                 new Cash(50)));
         checkout.addTransaction(new Transaction(new Client("Ana Maria"), items.get(3),
                 new Card("1234567890123456", 3, 2021)));
+        checkout.addTransaction(new Transaction(new Client("Ionela"), items,
+                new MealVouchers(15.18, 2)));
         checkout.displayTransactions();
     }
 

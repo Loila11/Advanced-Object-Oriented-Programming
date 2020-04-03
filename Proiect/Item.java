@@ -33,9 +33,4 @@ public class Item {
     public int getID() {
         return ID;
     }
-
-//    other
-    public void displayItem() {
-        System.out.println(name + ' ' + price);
-    }
 }

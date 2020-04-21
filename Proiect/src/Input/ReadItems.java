@@ -39,7 +39,6 @@ public class ReadItems {
         if (instance == null) {
             instance = new ReadItems();
         }
-
         return instance;
     }
 }

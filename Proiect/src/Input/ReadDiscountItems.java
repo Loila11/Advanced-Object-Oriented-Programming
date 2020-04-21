@@ -40,7 +40,6 @@ public class ReadDiscountItems {
         if (instance == null) {
             instance = new ReadDiscountItems();
         }
-
         return instance;
     }
 }

@@ -38,7 +38,6 @@ public class ReadClients {
         if (instance == null) {
             instance = new ReadClients();
         }
-
         return instance;
     }
 }

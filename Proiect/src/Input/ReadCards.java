@@ -39,7 +39,6 @@ public class ReadCards {
         if (instance == null) {
             instance = new ReadCards();
         }
-
         return instance;
     }
 }

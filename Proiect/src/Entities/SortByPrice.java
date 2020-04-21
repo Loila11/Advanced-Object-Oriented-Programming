@@ -1,3 +1,5 @@
+package Entities;
+
 import java.util.Comparator;
 
 public class SortByPrice implements Comparator<Item> {

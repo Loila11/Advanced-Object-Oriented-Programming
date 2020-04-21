@@ -1,3 +1,5 @@
+package Entities;
+
 public class MealVouchers extends PaymentMethod{
     private double value;
     private int noVouchers;

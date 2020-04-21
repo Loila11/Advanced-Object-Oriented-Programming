@@ -1,8 +1,12 @@
 # Proiect
 
-Software casa de marcat
+### Descriere
+Software casa de marcat.
 
-## Structura claselor
+### Structura claselor
+- __Main__: Clasa principala in care declar o casa de marcat (_Checkout_) si initializez toate obiectele aferente.
+
+#### Pachetul Services
 - __Checkout__: Clasa de serviciu. Contine lista tuturor tranzactiilor efectuate anterior(ArrayList<_Transaction_>) si o serie de operatii care pot fi facute pe baza acestora:
     - addTransaction(Transaction transaction)
     - calcTotalPrice(Transaction transaction)
@@ -13,7 +17,9 @@ Software casa de marcat
     - displayCardTransactions()
     - displayCashTransactions()
     - displayVoucherTransactions()
+- __Audit__: Clasa de serviciu care scrie intr-un fisier de tip CSV de fiecare data cand este executata o actiune / interogare.
 
+#### Pachetul Entities
 - __Transaction__: Contine informatii despre produsele care urmeaza a fi achizitionate(ArrayList<_Item_>), clientul caruia ii apartin(_Client_) si metoda de plata pe care planuieste sa o foloseasca(_PaymentMethod_). Include operatiile:
     - getItem(String itemName)
     - addItem(Item item)
@@ -38,9 +44,20 @@ Software casa de marcat
 
 - __MealVouchers__: Clasa derivata din _PaymentMethod_.
 
-- __SortByPrice__, __SortByName__: doua metode de sortare a listei de produse din magazin.
+- __SortByPrice__, __SortByName__: Doua metode de sortare a listei de produse din magazin.
 
-- __Main__: Clasa principala in care declar o casa de marcat (_Checkout_) si initializez toate obiectele aferente.
+#### Pachetul Input
+- __ReadCards__: Clasa Singleton prin intermediul careia citesc lista de carduri dintr-un fisier de tip CSV.
+- __ReadClients__: Clasa Singleton prin intermediul careia citesc lista de clienti dintr-un fisier de tip CSV.
+- __ReadItems__: Clasa Singleton prin intermediul careia citesc lista de produse dintr-un fisier de tip CSV.
+- __ReadDiscountItems__: Clasa Singleton prin intermediul careia citesc lista de produse aflate la reducere dintr-un fisier de tip CSV.
 
-## Alte fisiere
-- produse.txt: lista produselor din magazin cu preturile aferente.
+#### Pachetul Exceptions
+- __WrongFormat__: Exceptie ridicata atunci cand fisierul de intrare nu are formatul potrivit.
+- __CatchFNFE__: Clasa cu ajutorul careia abordez exceptiile de tipul FileNotFoundException la declararea unui fisier de citire.
+
+### Alte fisiere
+- produse.csv: lista produselor din magazin (care nu sunt la reducere) cu preturile aferente.
+- reduse.csv: lista produselor din magazin cu preturile aferente inainte de reducere.
+- clienti.csv: lista clientilor care viziteaza frecvent magazinul.
+- carduri.csv: lista informatiilor cardurilor introduse deja in sistem de catre clienti.

@@ -1,19 +1,26 @@
+package Entities;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import static java.lang.Integer.parseInt;
 
 public class Card extends PaymentMethod {
-    private String cardNo;
+    private String name, cardNo;
     private int expMonth, expYear;
 
 //    constructor
-    Card(String cardNo, int expMonth, int expYear) {
+    public Card(String name, String cardNo, int expMonth, int expYear) {
+        this.name = name;
         this.cardNo = cardNo;
         this.expMonth = expMonth;
         this.expYear = expYear;
     }
 
 //    getters
+    public String getName() {
+        return name;
+    }
+
     private String getCardNo() {
         return cardNo;
     }
@@ -27,6 +34,10 @@ public class Card extends PaymentMethod {
     }
 
 //    setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setCardNo(String cardNo) {
         this.cardNo = cardNo;
     }

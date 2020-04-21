@@ -1,3 +1,5 @@
+package Entities;
+
 public abstract class PaymentMethod {
     public String getPaymentMethod(){
         return "Unknown";

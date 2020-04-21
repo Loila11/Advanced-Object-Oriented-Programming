@@ -1,3 +1,5 @@
+package Entities;
+
 public class DiscountItem extends Item {
     private int discount = 10;
 

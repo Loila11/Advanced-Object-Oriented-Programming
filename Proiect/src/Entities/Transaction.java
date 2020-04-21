@@ -1,3 +1,7 @@
+package Entities;
+
+import Services.Audit;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +67,7 @@ public class Transaction {
                 return item;
             }
         }
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
         return null;
     }
 
@@ -72,9 +77,11 @@ public class Transaction {
         } else {
             this.items.put(item, 1);
         }
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
     }
 
     public void removeItem(Item item) {
         this.items.remove(item);
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
     }
 }

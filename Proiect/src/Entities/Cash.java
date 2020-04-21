@@ -1,3 +1,5 @@
+package Entities;
+
 public class Cash extends PaymentMethod {
     private double givenAmount;
 

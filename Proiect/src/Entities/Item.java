@@ -1,3 +1,5 @@
+package Entities;
+
 public class Item {
     protected String name;
     protected double price;

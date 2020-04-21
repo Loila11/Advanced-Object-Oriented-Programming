@@ -1,3 +1,8 @@
+package Services;
+
+import Entities.Item;
+import Entities.Transaction;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -31,6 +36,7 @@ public class Checkout {
 //    other
     public void addTransaction(Transaction transaction) {
         this.transactions.add(transaction);
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
     }
 
     public double calcTotalPrice(Transaction transaction) {
@@ -40,10 +46,12 @@ public class Checkout {
             Item item = entry.getKey();
             price += item.getPrice() * noItems;
         }
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
         return price;
     }
 
     public boolean checkPayment(Transaction transaction) {
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
         return transaction.getPaymentMethod().checkPaymentMethod(calcTotalPrice(transaction));
     }
 
@@ -54,36 +62,41 @@ public class Checkout {
             Item item = entry.getKey();
             System.out.println(noItems + " * " + item.getName() + ' ' + item.getPrice());
         }
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
     }
 
     public void displayTransaction(Transaction transaction) {
-        System.out.println(transaction.getClient().getName() + "\nPayment: " +
-                transaction.getPaymentMethod().getPaymentMethod());
+        System.out.println(transaction.getClient().getFirstName() + " " + transaction.getClient().getLastName() +
+                "\nPayment: " + transaction.getPaymentMethod().getPaymentMethod());
         displayItems(transaction);
         System.out.println("Total: " + calcTotalPrice(transaction));
         System.out.println("-----------------");
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
     }
 
     public void displayTransactions() {
         for (Transaction transaction : this.transactions) {
             displayTransaction(transaction);
         }
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
     }
 
     public void displayCardTransactions() {
         for (Transaction transaction : this.transactions) {
-            if (transaction.getPaymentMethod().getPaymentMethod().equals("Card")) {
+            if (transaction.getPaymentMethod().getPaymentMethod().equals("Entities.Card")) {
                 displayTransaction(transaction);
             }
         }
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
     }
 
     public void displayCashTransactions() {
         for (Transaction transaction : this.transactions) {
-            if (transaction.getPaymentMethod().getPaymentMethod().equals("Cash")) {
+            if (transaction.getPaymentMethod().getPaymentMethod().equals("Entities.Cash")) {
                 displayTransaction(transaction);
             }
         }
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
     }
 
     public void displayVoucherTransactions() {
@@ -92,5 +105,6 @@ public class Checkout {
                 displayTransaction(transaction);
             }
         }
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
     }
 }

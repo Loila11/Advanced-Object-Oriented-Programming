@@ -1,7 +1,4 @@
-# Proiect
-
-### Descriere
-Software casa de marcat.
+# Software casa de marcat
 
 ### Structura claselor
 - __Main__: Clasa principala in care declar o casa de marcat (_Checkout_) si initializez toate obiectele aferente.

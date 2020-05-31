@@ -1,5 +1,6 @@
-package Input;
+package IO;
 
+import Entities.DiscountItem;
 import Entities.Item;
 import Exceptions.CatchFNFE;
 import Exceptions.WrongFormat;
@@ -9,35 +10,35 @@ import java.util.Scanner;
 
 import static java.lang.Float.parseFloat;
 
-public class ReadItems {
-    private static ReadItems instance = null;
-    public ArrayList<Item> items;
+public class ReadDiscountItems {
+    private static ReadDiscountItems instance = null;
+    public ArrayList<Item> discountItems;
 
-    private ReadItems() {
+    private ReadDiscountItems() {
         while (true) {
-            Scanner in = new CatchFNFE("produse").in;
-            items = new ArrayList<>();
+            Scanner in = new CatchFNFE("produse reduse").in;
+            discountItems = new ArrayList<>();
             try {
                 while (in.hasNextLine()) {
                     String[] info = in.nextLine().split(",");
                     if (info.length != 2) {
                         throw new WrongFormat();
                     }
-                    items.add(new Item(info[0], parseFloat(info[1])));
+                    discountItems.add(new DiscountItem(info[0], parseFloat(info[1])));
                 }
                 in.close();
                 break;
             } catch (WrongFormat | IndexOutOfBoundsException | NumberFormatException wrongFormat) {
                 wrongFormat.printStackTrace();
-                items = new ArrayList<>();
+                discountItems = new ArrayList<>();
                 in.close();
             }
         }
     }
 
-    public static ReadItems getInstance() {
+    public static ReadDiscountItems getInstance() {
         if (instance == null) {
-            instance = new ReadItems();
+            instance = new ReadDiscountItems();
         }
         return instance;
     }

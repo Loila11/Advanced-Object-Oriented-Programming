@@ -21,15 +21,15 @@ public class Card extends PaymentMethod {
         return name;
     }
 
-    private String getCardNo() {
+    public String getCardNo() {
         return cardNo;
     }
 
-    private int getExpMonth() {
+    public int getExpMonth() {
         return expMonth;
     }
 
-    private int getExpYear() {
+    public int getExpYear() {
         return expYear;
     }
 

@@ -13,6 +13,12 @@ public class Client {
         this.lastName = lastName;
     }
 
+    public Client(String firstName, String lastName, int ID) {
+        this.ID = ID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
 //    setter
     public void setFirstName(String firstName) {
         this.firstName = firstName;

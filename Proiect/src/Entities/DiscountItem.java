@@ -8,6 +8,10 @@ public class DiscountItem extends Item {
         super(name, price);
     }
 
+    public DiscountItem(String name, double price, int ID) {
+        super(name, price, ID);
+    }
+
 //    setter
     public void setDiscount(int discount) {
         this.discount = discount;

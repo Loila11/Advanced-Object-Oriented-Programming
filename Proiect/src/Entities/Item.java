@@ -14,6 +14,12 @@ public class Item {
         this.name = name;
     }
 
+    public Item(String name, double price, int ID) {
+        this.ID = ID;
+        this.price = price;
+        this.name = name;
+    }
+
 //    setters
     public void setName(String name) {
         this.name = name;

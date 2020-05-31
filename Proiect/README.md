@@ -43,7 +43,7 @@
 
 - __SortByPrice__, __SortByName__: Doua metode de sortare a listei de produse din magazin.
 
-#### Pachetul Input
+#### Pachetul IO
 - __ReadCards__: Clasa Singleton prin intermediul careia citesc lista de carduri dintr-un fisier de tip CSV.
 - __ReadClients__: Clasa Singleton prin intermediul careia citesc lista de clienti dintr-un fisier de tip CSV.
 - __ReadItems__: Clasa Singleton prin intermediul careia citesc lista de produse dintr-un fisier de tip CSV.
@@ -52,6 +52,12 @@
 #### Pachetul Exceptions
 - __WrongFormat__: Exceptie ridicata atunci cand fisierul de intrare nu are formatul potrivit.
 - __CatchFNFE__: Clasa cu ajutorul careia abordez exceptiile de tipul FileNotFoundException la declararea unui fisier de citire.
+
+#### Pachetul Tables
+- __TableCARDS__: Se ocupa de manipularea tabelului cu obiecte din clasa _Card_.
+- __TableCLIENTS__: Se ocupa de manipularea tabelului cu obiecte din clasa _Client_.
+- __TableITEMS__: Se ocupa de manipularea tabelului cu obiecte din clasa _Item_.
+- __TableDISCOUNT_ITEMS__: Se ocupa de manipularea tabelului cu obiecte din clasa _DiscountItem_.
 
 ### Alte fisiere
 - produse.csv: lista produselor din magazin (care nu sunt la reducere) cu preturile aferente.

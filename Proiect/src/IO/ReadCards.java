@@ -1,44 +1,43 @@
-package Input;
+package IO;
 
-import Entities.DiscountItem;
-import Entities.Item;
+import Entities.Card;
 import Exceptions.CatchFNFE;
 import Exceptions.WrongFormat;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static java.lang.Float.parseFloat;
+import static java.lang.Integer.parseInt;
 
-public class ReadDiscountItems {
-    private static ReadDiscountItems instance = null;
-    public ArrayList<Item> discountItems;
+public class ReadCards {
+    private static ReadCards instance = null;
+    public ArrayList<Card> cards;
 
-    private ReadDiscountItems() {
+    private ReadCards() {
         while (true) {
-            Scanner in = new CatchFNFE("produse reduse").in;
-            discountItems = new ArrayList<>();
+            Scanner in = new CatchFNFE("carduri").in;
+            cards = new ArrayList<>();
             try {
                 while (in.hasNextLine()) {
                     String[] info = in.nextLine().split(",");
-                    if (info.length != 2) {
+                    if (info.length != 4) {
                         throw new WrongFormat();
                     }
-                    discountItems.add(new DiscountItem(info[0], parseFloat(info[1])));
+                    cards.add(new Card(info[0], info[1], parseInt(info[2]), parseInt(info[3])));
                 }
                 in.close();
                 break;
             } catch (WrongFormat | IndexOutOfBoundsException | NumberFormatException wrongFormat) {
                 wrongFormat.printStackTrace();
-                discountItems = new ArrayList<>();
+                cards = new ArrayList<>();
                 in.close();
             }
         }
     }
 
-    public static ReadDiscountItems getInstance() {
+    public static ReadCards getInstance() {
         if (instance == null) {
-            instance = new ReadDiscountItems();
+            instance = new ReadCards();
         }
         return instance;
     }

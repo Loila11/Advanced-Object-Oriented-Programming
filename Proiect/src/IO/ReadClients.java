@@ -1,4 +1,4 @@
-package Input;
+package IO;
 
 import Entities.Client;
 import Exceptions.CatchFNFE;

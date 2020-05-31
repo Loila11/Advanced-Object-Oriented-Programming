@@ -1,43 +1,43 @@
-package Input;
+package IO;
 
-import Entities.Card;
+import Entities.Item;
 import Exceptions.CatchFNFE;
 import Exceptions.WrongFormat;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static java.lang.Integer.parseInt;
+import static java.lang.Float.parseFloat;
 
-public class ReadCards {
-    private static ReadCards instance = null;
-    public ArrayList<Card> cards;
+public class ReadItems {
+    private static ReadItems instance = null;
+    public ArrayList<Item> items;
 
-    private ReadCards() {
+    private ReadItems() {
         while (true) {
-            Scanner in = new CatchFNFE("carduri").in;
-            cards = new ArrayList<>();
+            Scanner in = new CatchFNFE("produse").in;
+            items = new ArrayList<>();
             try {
                 while (in.hasNextLine()) {
                     String[] info = in.nextLine().split(",");
-                    if (info.length != 4) {
+                    if (info.length != 2) {
                         throw new WrongFormat();
                     }
-                    cards.add(new Card(info[0], info[1], parseInt(info[2]), parseInt(info[3])));
+                    items.add(new Item(info[0], parseFloat(info[1])));
                 }
                 in.close();
                 break;
             } catch (WrongFormat | IndexOutOfBoundsException | NumberFormatException wrongFormat) {
                 wrongFormat.printStackTrace();
-                cards = new ArrayList<>();
+                items = new ArrayList<>();
                 in.close();
             }
         }
     }
 
-    public static ReadCards getInstance() {
+    public static ReadItems getInstance() {
         if (instance == null) {
-            instance = new ReadCards();
+            instance = new ReadItems();
         }
         return instance;
     }

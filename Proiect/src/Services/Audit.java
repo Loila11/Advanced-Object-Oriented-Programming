@@ -11,8 +11,8 @@ public class Audit {
         try {
             FileWriter file;
             file = new FileWriter(new File("audit.csv"), true);
-            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-dd-MM HH:mm:ss\n"));
-            file.write(actionName + ',' + timestamp);
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-dd-MM HH:mm:ss"));
+            file.write(actionName + ',' + timestamp + ',' + Thread.currentThread().getName() + '\n');
             file.close();
         } catch (IOException e) {
             e.printStackTrace();

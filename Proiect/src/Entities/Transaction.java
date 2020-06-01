@@ -62,26 +62,29 @@ public class Transaction {
 
 //    other
     public Item getItem(String itemName) {
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
         for (Item item : this.items.keySet()) {
             if (item.getName().equals(itemName)) {
                 return item;
             }
         }
-        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
         return null;
     }
 
     public void addItem(Item item) {
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
         if (this.items.containsKey(item)) {
             this.items.replace(item, this.items.get(item) + 1);
         } else {
             this.items.put(item, 1);
         }
-        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
     }
 
     public void removeItem(Item item) {
-        this.items.remove(item);
         new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+        this.items.remove(item);
     }
 }

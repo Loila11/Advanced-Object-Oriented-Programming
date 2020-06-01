@@ -35,76 +35,96 @@ public class Checkout {
 
 //    other
     public void addTransaction(Transaction transaction) {
-        this.transactions.add(transaction);
         new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+        this.transactions.add(transaction);
     }
 
     public double calcTotalPrice(Transaction transaction) {
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
         double price = 0;
         for (Map.Entry<Item, Integer> entry : transaction.getItems().entrySet()) {
             Integer noItems = entry.getValue();
             Item item = entry.getKey();
             price += item.getPrice() * noItems;
         }
-        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
         return price;
     }
 
     public boolean checkPayment(Transaction transaction) {
         new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
         return transaction.getPaymentMethod().checkPaymentMethod(calcTotalPrice(transaction));
     }
 
 //    displays
-    public void displayItems(Transaction transaction) {
+    public String displayItems(Transaction transaction) {
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+        StringBuilder t = new StringBuilder();
         for (Map.Entry<Item, Integer> entry : transaction.getItems().entrySet()) {
             Integer noItems = entry.getValue();
             Item item = entry.getKey();
-            System.out.println(noItems + " * " + item.getName() + ' ' + item.getPrice());
+            t.append(noItems).append(" * ").append(item.getName()).append(' ').append(item.getPrice()).append('\n');
         }
-        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+        return String.valueOf(t);
     }
 
-    public void displayTransaction(Transaction transaction) {
-        System.out.println(transaction.getClient().getFirstName() + " " + transaction.getClient().getLastName() +
-                "\nPayment: " + transaction.getPaymentMethod().getPaymentMethod());
-        displayItems(transaction);
-        System.out.println("Total: " + calcTotalPrice(transaction));
-        System.out.println("-----------------");
+    public String displayTransaction(Transaction transaction) {
         new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+        return transaction.getClient().getFirstName() + " " + transaction.getClient().getLastName() + "\n" +
+                "Payment: " + transaction.getPaymentMethod().getPaymentMethod() + "\n" +
+                displayItems(transaction) + "\n" +
+                "Total: " + calcTotalPrice(transaction) + "\n" +
+                "-----------------";
     }
 
-    public void displayTransactions() {
+    public String displayAllTransactions() {
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+        StringBuilder t = new StringBuilder();
         for (Transaction transaction : this.transactions) {
-            displayTransaction(transaction);
+            t.append(displayTransaction(transaction)).append('\n');
         }
-        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+        return String.valueOf(t);
     }
 
-    public void displayCardTransactions() {
+    public String displayCardTransactions() {
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+        StringBuilder t = new StringBuilder();
         for (Transaction transaction : this.transactions) {
-            if (transaction.getPaymentMethod().getPaymentMethod().equals("Entities.Card")) {
-                displayTransaction(transaction);
+            if (transaction.getPaymentMethod().getPaymentMethod().equals("Card")) {
+                t.append(displayTransaction(transaction)).append('\n');
             }
         }
-        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+        return String.valueOf(t);
     }
 
-    public void displayCashTransactions() {
+    public String displayCashTransactions() {
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+        StringBuilder t = new StringBuilder();
         for (Transaction transaction : this.transactions) {
-            if (transaction.getPaymentMethod().getPaymentMethod().equals("Entities.Cash")) {
-                displayTransaction(transaction);
+            if (transaction.getPaymentMethod().getPaymentMethod().equals("Cash")) {
+                t.append(displayTransaction(transaction)).append('\n');
             }
         }
-        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+        return String.valueOf(t);
     }
 
-    public void displayVoucherTransactions() {
+    public String displayVoucherTransactions() {
+        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+
+        StringBuilder t = new StringBuilder();
         for (Transaction transaction : this.transactions) {
-            if (transaction.getPaymentMethod().getPaymentMethod().equals("Bonuri de masa")) {
-                displayTransaction(transaction);
+            if (transaction.getPaymentMethod().getPaymentMethod().equals("Meal Vouchers")) {
+                t.append(displayTransaction(transaction)).append('\n');
             }
         }
-        new Audit(Thread.currentThread().getStackTrace()[1].getMethodName());
+        return String.valueOf(t);
     }
 }

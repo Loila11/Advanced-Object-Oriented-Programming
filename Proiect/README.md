@@ -15,6 +15,7 @@
     - displayCashTransactions()
     - displayVoucherTransactions()
 - __Audit__: Clasa de serviciu care scrie intr-un fisier de tip CSV de fiecare data cand este executata o actiune / interogare.
+- __GUI__: Clasa care asigura functionarea interfetei grafice.
 
 #### Pachetul Entities
 - __Transaction__: Contine informatii despre produsele care urmeaza a fi achizitionate(ArrayList<_Item_>), clientul caruia ii apartin(_Client_) si metoda de plata pe care planuieste sa o foloseasca(_PaymentMethod_). Include operatiile:

@@ -31,7 +31,7 @@ public class MealVouchers extends PaymentMethod{
 //    other
     @Override
     public String getPaymentMethod() {
-    return "Bonuri de masa";
+    return "Meal Vouchers";
 }
 
     @Override

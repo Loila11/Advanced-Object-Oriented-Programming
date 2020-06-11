@@ -19,7 +19,7 @@ public class TableCLIENTS {
 
     private TableCLIENTS() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clients");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clients", "root", "root");
             statement = connection.createStatement();
             System.out.println("Successfully connected to the database");
         } catch (SQLException e) {
@@ -29,11 +29,10 @@ public class TableCLIENTS {
 
     public void createClients(ArrayList<Client> clients) {
         try {
-            statement.execute(
-                    "create table CLIENTS (" +
-                            "firstName varchar2(20), " +
-                            "lastName varchar2(16)" +
-                            "ID number(10)");
+            statement.execute("create table CLIENTS (" +
+                    "firstName varchar(20), " +
+                    "lastName varchar(20), " +
+                    "ID int);");
             for (Client client : clients) {
                 addClient(client);
             }
@@ -45,7 +44,7 @@ public class TableCLIENTS {
     public ArrayList<Client> readClients() {
         ArrayList<Client> clients = new ArrayList<>();
         try {
-            ResultSet resultSet = statement.executeQuery("select * from CLIENTS");
+            ResultSet resultSet = statement.executeQuery("select * from CLIENTS;");
             while (resultSet.next()) {
                 clients.add(new Client(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3)));
             }
@@ -58,11 +57,11 @@ public class TableCLIENTS {
     public void addClient(Client client) {
         try {
             statement.execute(
-                    "insert into CLIENTS values(" +
-                            client.getFirstName() +
-                            client.getLastName() +
-                            client.getID());
-            statement.execute("commit");
+                    "insert into CLIENTS values('" +
+                            client.getFirstName() + "', '" +
+                            client.getLastName() + "', '" +
+                            client.getID() + "');");
+            statement.execute("commit;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,8 +69,8 @@ public class TableCLIENTS {
 
     public void removeClient(Client client) {
         try {
-            statement.execute("delete from CLIENTS where ID=" + client.getID());
-            statement.execute("commit");
+            statement.execute("delete from CLIENTS where ID=" + client.getID() + ";");
+            statement.execute("commit;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -81,11 +80,11 @@ public class TableCLIENTS {
         try {
             statement.execute(
                     "update CLIENTS set firstName=" + client.getFirstName() +
-                            " where ID=" + client.getID());
+                            " where ID=" + client.getID() + ";");
             statement.execute(
                     "update CLIENTS set lastName=" + client.getLastName() +
-                            " where ID=" + client.getID());
-            statement.execute("commit");
+                            " where ID=" + client.getID() + ";");
+            statement.execute("commit;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -93,7 +92,7 @@ public class TableCLIENTS {
 
     public void deleteClients() {
         try {
-            statement.execute("delete CLIENTS");
+            statement.execute("drop table CLIENTS;");
         } catch (SQLException e) {
             e.printStackTrace();
         }

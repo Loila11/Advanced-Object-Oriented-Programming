@@ -1,6 +1,7 @@
 package Tables;
 
 import Entities.DiscountItem;
+import Entities.Item;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class TableDISCOUNT_ITEMS {
 
     private TableDISCOUNT_ITEMS() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/discountItems");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/discount_items", "root", "root");
             statement = connection.createStatement();
             System.out.println("Successfully connected to the database");
         } catch (SQLException e) {
@@ -27,14 +28,13 @@ public class TableDISCOUNT_ITEMS {
         }
     }
 
-    public void createDiscountItems(ArrayList<DiscountItem> discountItems) {
+    public void createDiscountItems(ArrayList<Item> discountItems) {
         try {
-            statement.execute(
-                    "create table DISCOUNT_ITEMS (" +
-                            "name varchar2(40), " +
-                            "price number(10)" +
-                            "ID number(10)");
-            for (DiscountItem discountItem : discountItems) {
+            statement.execute("create table DISCOUNT_ITEMS (" +
+                    "name varchar(20), " +
+                    "price float, " +
+                    "ID int);");
+            for (Item discountItem : discountItems) {
                 addDiscountItem(discountItem);
             }
         } catch (SQLException e) {
@@ -45,7 +45,7 @@ public class TableDISCOUNT_ITEMS {
     public ArrayList<DiscountItem> readDiscountItems() {
         ArrayList<DiscountItem> discountItems = new ArrayList<>();
         try {
-            ResultSet resultSet = statement.executeQuery("select * from DISCOUNT_ITEMS");
+            ResultSet resultSet = statement.executeQuery("select * from DISCOUNT_ITEMS;");
             while (resultSet.next()) {
                 discountItems.add(new DiscountItem(
                         resultSet.getString(1),
@@ -58,14 +58,14 @@ public class TableDISCOUNT_ITEMS {
         return discountItems;
     }
 
-    public void addDiscountItem(DiscountItem discountItem) {
+    public void addDiscountItem(Item discountItem) {
         try {
             statement.execute(
-                    "insert into DISCOUNT_ITEMS values(" +
-                            discountItem.getName() +
-                            discountItem.getPrice() +
-                            discountItem.getID());
-            statement.execute("commit");
+                    "insert into DISCOUNT_ITEMS values('" +
+                            discountItem.getName() + "', '" +
+                            discountItem.getPrice() + "', '" +
+                            discountItem.getID() + "');");
+            statement.execute("commit;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -73,8 +73,8 @@ public class TableDISCOUNT_ITEMS {
 
     public void removeDiscountItem(DiscountItem discountItem) {
         try {
-            statement.execute("delete from DISCOUNT_ITEMS where ID=" + discountItem.getID());
-            statement.execute("commit");
+            statement.execute("delete from DISCOUNT_ITEMS where ID=" + discountItem.getID() + ";");
+            statement.execute("commit;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -84,11 +84,11 @@ public class TableDISCOUNT_ITEMS {
         try {
             statement.execute(
                     "update DISCOUNT_ITEMS set name=" + discountItem.getName() +
-                            " where ID=" + discountItem.getID());
+                            " where ID=" + discountItem.getID() + ";");
             statement.execute(
                     "update DISCOUNT_ITEMS set price=" + discountItem.getPrice() +
-                            " where ID=" + discountItem.getID());
-            statement.execute("commit");
+                            " where ID=" + discountItem.getID() + ";");
+            statement.execute("commit;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -96,7 +96,7 @@ public class TableDISCOUNT_ITEMS {
 
     public void deleteDiscountItems() {
         try {
-            statement.execute("delete DISCOUNT_ITEMS");
+            statement.execute("drop table DISCOUNT_ITEMS;");
         } catch (SQLException e) {
             e.printStackTrace();
         }

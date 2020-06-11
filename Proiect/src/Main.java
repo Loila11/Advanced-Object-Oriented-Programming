@@ -1,28 +1,43 @@
 import Entities.*;
 import IO.*;
-import Entities.SortByPrice;
 import Services.Checkout;
 import Services.GUI;
-
-import java.util.ArrayList;
+import Tables.TableCARDS;
+import Tables.TableCLIENTS;
+import Tables.TableDISCOUNT_ITEMS;
+import Tables.TableITEMS;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Client> clients = ReadClients.getInstance().clients;
-        ArrayList<Card> cards = ReadCards.getInstance().cards;
-        ArrayList<Item> discountItems = ReadDiscountItems.getInstance().discountItems;
-        ArrayList<Item> items = ReadItems.getInstance().items;
-        items.sort(new SortByPrice());
+        TableCARDS tableCARDS = TableCARDS.getInstance();
+        TableCLIENTS tableCLIENTS = TableCLIENTS.getInstance();
+        TableITEMS tableITEMS = TableITEMS.getInstance();
+        TableDISCOUNT_ITEMS tableDISCOUNT_ITEMS = TableDISCOUNT_ITEMS.getInstance();
+
+        tableCLIENTS.createClients(ReadClients.getInstance().clients);
+        tableCARDS.createCards(ReadCards.getInstance().cards);
+        tableITEMS.createItems(ReadItems.getInstance().items);
+        tableDISCOUNT_ITEMS.createDiscountItems(ReadDiscountItems.getInstance().discountItems);
+
         System.out.println("Interfata grafica a fost configurata!");
 
-        Checkout checkout = new Checkout(new Transaction(clients.get(0), items, new Cash(50)));
-        checkout.addTransaction(new Transaction(clients.get(1), items.get(3), cards.get(0)));
-
-        items.add(discountItems.get(0));
-
-        checkout.addTransaction(new Transaction(clients.get(2), items, new MealVouchers(15.18, 2)));
+        Checkout checkout = new Checkout(new Transaction(tableCLIENTS.readClients().get(0),
+                tableITEMS.readItems(),
+                new Cash(50)));
+        checkout.addTransaction(new Transaction(tableCLIENTS.readClients().get(1),
+                tableITEMS.readItems().get(3),
+                tableCARDS.readCards().get(0)));
+        tableITEMS.addItem(tableDISCOUNT_ITEMS.readDiscountItems().get(0));
+        checkout.addTransaction(new Transaction(tableCLIENTS.readClients().get(2),
+                tableITEMS.readItems(),
+                new MealVouchers(15.18, 2)));
 
         GUI image = new GUI(checkout);
         image.setVisible(true);
+
+        tableCLIENTS.deleteClients();
+        tableCARDS.deleteCards();
+        tableITEMS.deleteItems();
+        tableDISCOUNT_ITEMS.deleteDiscountItems();
     }
 }

@@ -19,7 +19,7 @@ public class TableCARDS {
 
     private TableCARDS() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cards");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cards", "root", "root");
             statement = connection.createStatement();
             System.out.println("Successfully connected to the database");
         } catch (SQLException e) {
@@ -29,12 +29,11 @@ public class TableCARDS {
 
     public void createCards(ArrayList<Card> cards) {
         try {
-            statement.execute(
-                    "create table CARDS (" +
-                            "name varchar2(20), " +
-                            "cardNo varchar2(16)" +
-                            "expMonth number(2)" +
-                            "expYear number(2)");
+            statement.execute("create table CARDS (" +
+                    "name varchar(20), " +
+                    "cardNo varchar(20), " +
+                    "expMonth int, " +
+                    "expYear int);");
             for (Card card : cards) {
                 addCard(card);
             }
@@ -46,7 +45,7 @@ public class TableCARDS {
     public ArrayList<Card> readCards() {
         ArrayList<Card> cards = new ArrayList<>();
         try {
-            ResultSet resultSet = statement.executeQuery("select * from CARDS");
+            ResultSet resultSet = statement.executeQuery("select * from CARDS;");
             while (resultSet.next()) {
                 cards.add(new Card(
                         resultSet.getString(1),
@@ -63,12 +62,12 @@ public class TableCARDS {
     public void addCard(Card card) {
         try {
             statement.execute(
-                    "insert into CARDS values(" +
-                            card.getName() +
-                            card.getCardNo() +
-                            card.getExpMonth() +
-                            card.getExpYear());
-            statement.execute("commit");
+                    "insert into CARDS values('" +
+                            card.getName() + "', '" +
+                            card.getCardNo() + "', '" +
+                            card.getExpMonth() + "', '" +
+                            card.getExpYear() + "');");
+            statement.execute("commit;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,8 +75,8 @@ public class TableCARDS {
 
     public void removeCard(Card card) {
         try {
-            statement.execute("delete from CARDS where cardNo=" + card.getCardNo());
-            statement.execute("commit");
+            statement.execute("delete from CARDS where cardNo=" + card.getCardNo() + ";");
+            statement.execute("commit;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -85,8 +84,8 @@ public class TableCARDS {
 
     public void updateCards(Card card) {
         try {
-            statement.execute("update CARDS set name=" + card.getName() + " where cardNo=" + card.getCardNo());
-            statement.execute("commit");
+            statement.execute("update CARDS set name=" + card.getName() + " where cardNo=" + card.getCardNo() + ";");
+            statement.execute("commit;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,7 +93,7 @@ public class TableCARDS {
 
     public void deleteCards() {
         try {
-            statement.execute("delete CARDS");
+            statement.execute("drop table CARDS;");
         } catch (SQLException e) {
             e.printStackTrace();
         }
